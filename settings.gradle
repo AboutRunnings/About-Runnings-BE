@@ -1,0 +1,6 @@
+rootProject.name = 'aboutrunnings'
+include 'Domain'
+include 'Api'
+include 'Infra'
+include 'Common'
+
