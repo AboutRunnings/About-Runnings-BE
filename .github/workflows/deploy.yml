@@ -92,9 +92,22 @@ jobs:
           port: ${{ secrets.EC2_SSH_PORT }}
           timeout: 60s
           script: |
-            sudo docker stop ${{ secrets.DOCKERHUB_REPO }}
-            sudo docker rm ${{ secrets.DOCKERHUB_REPO }}
-            sudo docker run -it -d -p 8080:8080 --name ${{ secrets.DOCKERHUB_REPO }} ${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.DOCKERHUB_REPO }}
+            # 이전에 실행 중인 컨테이너와 관련 리소스를 정리합니다.
+            sudo docker-compose down
+            
+            # docker-compose.yml 파일을 EC2 인스턴스로 복사합니다.
+            echo "${{ secrets.DOCKER_COMPOSE_CONTENT }}" > docker-compose.yml
+            
+            # Docker Hub에서 이미지를 가져옵니다.
+            sudo docker-compose pull
+            
+            # 서비스들을 시작합니다.
+            sudo docker-compose up -d
+#          script: |
+#            sudo docker stop ${{ secrets.DOCKERHUB_REPO }}
+#            sudo docker rm ${{ secrets.DOCKERHUB_REPO }}
+#            sudo docker run -it -d -p 8080:8080 --name ${{ secrets.DOCKERHUB_REPO }} ${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.DOCKERHUB_REPO }}
+
 
       # REMOVE Github IP FROM security group (9)
       - name: Remove IP FROM security group
