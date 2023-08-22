@@ -29,9 +29,15 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
 
-      # Docker 이미지 Build
-      - name: docker image build
-        run: docker build -t aboutrunnings/aboutrunnings .
+      - name: Build with Gradle
+        run: ./gradlew build
+
+      - name: Cache Gradle packages
+        uses: actions/cache@v1
+        with:
+          path: ~/.gradle/caches
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle') }}
+          restore-keys: ${{ runner.os }}-gradle
 
       # DockerHub Login
       - name: docker login
@@ -81,14 +87,14 @@ jobs:
         uses: appleboy/ssh-action@v0.1.6
         with:
           host: ${{ secrets.EC2_HOST }}
-          username: ubuntu
+          username: ec2-user
           password: ${{ secrets.EC2_PASSWORD }}
           port: ${{ secrets.EC2_SSH_PORT }}
           timeout: 60s
           script: |
-            sudo docker stop boot-prac-ci
-            sudo docker rm boot-prac-ci
-            sudo docker run -it -d -p 8080:8080 --name boot-prac-ci lucaskang134/boot-prac-ci
+            sudo docker stop ${{ secrets.DOCKERHUB_REPO }}
+            sudo docker rm ${{ secrets.DOCKERHUB_REPO }}
+            sudo docker run -it -d -p 8080:8080 --name ${{ secrets.DOCKERHUB_REPO }} ${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.DOCKERHUB_REPO }}
 
       # REMOVE Github IP FROM security group (9)
       - name: Remove IP FROM security group
