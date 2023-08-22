@@ -40,9 +40,22 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      # Docker Hub push (4)
-      - name: docker Hub push
-        run: docker push
+#      # Docker build&  Hub push (4)
+#      - name: docker Hub push
+#        run: |
+#          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.DOCKERHUB_REPO }} .
+#          docker push ${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.DOCKERHUB_REPO }}:latest
+
+      - name: Set Docker Compose values
+        run: |
+          sed -i 's/DOCKERHUB_USERNAME/${{ secrets.DOCKERHUB_USERNAME }}/' docker-compose.yml
+          sed -i 's/DOCKERHUB_REPO/${{ secrets.DOCKERHUB_REPO }}/' docker-compose.yml
+
+      - name: Docker Compose build and push
+        run: |
+          docker-compose build
+          docker-compose push
+
 
       # GET GitHub IP (5)
       - name: get GitHub IP
