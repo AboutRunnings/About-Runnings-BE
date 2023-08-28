@@ -1,3 +1,4 @@
 public enum BookmarkType {
-    CHALLENGE, COURSE
+    CHALLENGE,
+    COURSE
 }

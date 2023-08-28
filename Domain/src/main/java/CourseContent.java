@@ -1,16 +1,16 @@
+
 import jakarta.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Table(name = "tbl_course_content")
 @Getter
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class CourseContent extends BaseEntity{
+public class CourseContent extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -35,6 +35,4 @@ public class CourseContent extends BaseEntity{
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private final List<Comment> comments = new ArrayList<>();
-
-
 }

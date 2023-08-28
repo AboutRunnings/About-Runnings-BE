@@ -1,3 +1,4 @@
+
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -7,9 +8,10 @@ import lombok.NoArgsConstructor;
 @Getter
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class User extends BaseEntity{
+public class User extends BaseEntity {
 
-    @Id @GeneratedValue(strategy = GenerationType.AUTO)
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     private String name;

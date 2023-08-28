@@ -1,12 +1,12 @@
+
 import jakarta.persistence.*;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import lombok.Getter;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.format.annotation.DateTimeFormat;
-
-import java.time.LocalDateTime;
-import java.time.ZoneId;
 
 @Getter
 @MappedSuperclass
@@ -23,13 +23,13 @@ public abstract class BaseEntity {
     private LocalDateTime modifiedDate;
 
     @PrePersist
-    public void onPrePersist(){
+    public void onPrePersist() {
         this.createdDate = LocalDateTime.now(ZoneId.of("Asia/Seoul"));
         this.modifiedDate = this.createdDate;
     }
 
     @PreUpdate
-    public void onPreUpdate(){
+    public void onPreUpdate() {
         this.modifiedDate = LocalDateTime.now(ZoneId.of("Asia/Seoul"));
     }
 }

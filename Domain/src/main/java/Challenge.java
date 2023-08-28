@@ -1,17 +1,17 @@
-import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
 
+import jakarta.persistence.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Table(name = "tbl_challenge")
 @Getter
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Challenge extends BaseEntity{
+public class Challenge extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

@@ -1,15 +1,14 @@
+
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
-
 @Table(name = "tbl_run_history")
 @Getter
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class RunHistory extends BaseEntity{
+public class RunHistory extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -32,6 +31,4 @@ public class RunHistory extends BaseEntity{
     private Double endLongitude;
 
     private String location;
-
-
 }
