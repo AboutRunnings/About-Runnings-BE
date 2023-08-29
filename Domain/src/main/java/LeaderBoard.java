@@ -1,6 +1,7 @@
 
 import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -21,4 +22,12 @@ public class LeaderBoard extends BaseEntity {
     private String takeTime;
 
     private Double distance;
+
+    @Builder
+    public LeaderBoard(Long challengeId, Long userId, String takeTime, Double distance) {
+        this.challengeId = challengeId;
+        this.userId = userId;
+        this.takeTime = takeTime;
+        this.distance = distance;
+    }
 }

@@ -1,6 +1,7 @@
 
 import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -26,4 +27,20 @@ public class User extends BaseEntity {
     private String ageRange;
 
     private String profileImageUrl;
+
+    @Builder
+    public User(
+            String name,
+            String nickName,
+            String email,
+            GenderType genderType,
+            String ageRange,
+            String profileImageUrl) {
+        this.name = name;
+        this.nickName = nickName;
+        this.email = email;
+        this.genderType = genderType;
+        this.ageRange = ageRange;
+        this.profileImageUrl = profileImageUrl;
+    }
 }

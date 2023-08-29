@@ -31,4 +31,23 @@ public class Challenge extends BaseEntity {
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private final List<LeaderBoard> leaderBoards = new ArrayList<>();
+
+    public void addLeaderBoards(LeaderBoard leaderBoard) {
+        leaderBoards.add(leaderBoard);
+    }
+
+    public Challenge(
+            Long userId,
+            String title,
+            String content,
+            LocalDateTime startDate,
+            LocalDateTime endDate,
+            Long runHistoryId) {
+        this.userId = userId;
+        this.title = title;
+        this.content = content;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.runHistoryId = runHistoryId;
+    }
 }

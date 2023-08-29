@@ -1,6 +1,7 @@
 
 import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -31,4 +32,26 @@ public class RunHistory extends BaseEntity {
     private Double endLongitude;
 
     private String location;
+
+    @Builder
+    public RunHistory(
+            Long userId,
+            Double distance,
+            String takeTime,
+            Double slope,
+            Double startLatitude,
+            Double startLongitude,
+            Double endLatitude,
+            Double endLongitude,
+            String location) {
+        this.userId = userId;
+        this.distance = distance;
+        this.takeTime = takeTime;
+        this.slope = slope;
+        this.startLatitude = startLatitude;
+        this.startLongitude = startLongitude;
+        this.endLatitude = endLatitude;
+        this.endLongitude = endLongitude;
+        this.location = location;
+    }
 }

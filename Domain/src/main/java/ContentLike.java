@@ -17,4 +17,9 @@ public class ContentLike extends BaseEntity {
     private Long userId;
 
     private Long courseContentId;
+
+    public ContentLike(Long userId, Long courseContentId) {
+        this.userId = userId;
+        this.courseContentId = courseContentId;
+    }
 }

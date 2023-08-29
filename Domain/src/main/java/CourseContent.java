@@ -3,6 +3,7 @@ import jakarta.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -35,4 +36,30 @@ public class CourseContent extends BaseEntity {
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private final List<Comment> comments = new ArrayList<>();
+
+    public void addContentLikes(ContentLike contentLike) {
+        contentLikes.add(contentLike);
+    }
+
+    public void addComments(Comment comment) {
+        comments.add(comment);
+    }
+
+    @Builder
+    public CourseContent(
+            String content,
+            String location,
+            Double latitude,
+            Double longitude,
+            Double distance,
+            String takeTime,
+            Double slope) {
+        this.content = content;
+        this.location = location;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.distance = distance;
+        this.takeTime = takeTime;
+        this.slope = slope;
+    }
 }
