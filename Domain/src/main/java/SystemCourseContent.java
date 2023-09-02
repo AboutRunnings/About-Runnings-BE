@@ -1,17 +1,14 @@
 
 import jakarta.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 import lombok.AccessLevel;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-@Table(name = "tbl_course_content")
+@Table(name = "tbl_system_course_content")
 @Getter
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class CourseContent extends BaseEntity {
+public class SystemCourseContent {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -37,28 +34,13 @@ public class CourseContent extends BaseEntity {
 
     private Double slope;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    private final List<ContentLike> contentLikes = new ArrayList<>();
-
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    private final List<Comment> comments = new ArrayList<>();
-
-    public void addContentLikes(ContentLike contentLike) {
-        contentLikes.add(contentLike);
-    }
-
-    public void addComments(Comment comment) {
-        comments.add(comment);
-    }
-
-    @Builder
-    public CourseContent(
+    private SystemCourseContent(
             String content,
             String startLocation,
             String endLocation,
             Double startLatitude,
-            Double endLatitude,
             Double startLongitude,
+            Double endLatitude,
             Double endLongitude,
             Double distance,
             String takeTime,
@@ -66,15 +48,36 @@ public class CourseContent extends BaseEntity {
         this.content = content;
         this.startLocation = startLocation;
         this.endLocation = endLocation;
-
         this.startLatitude = startLatitude;
-        this.endLatitude = endLatitude;
-
         this.startLongitude = startLongitude;
+        this.endLatitude = endLatitude;
         this.endLongitude = endLongitude;
-
         this.distance = distance;
         this.takeTime = takeTime;
         this.slope = slope;
+    }
+
+    public SystemCourseContent toEntity(
+            String content,
+            String startLocation,
+            String endLocation,
+            Double startLatitude,
+            Double startLongitude,
+            Double endLatitude,
+            Double endLongitude,
+            Double distance,
+            String takeTime,
+            Double slope) {
+        return new SystemCourseContent(
+                content,
+                startLocation,
+                endLocation,
+                startLatitude,
+                endLatitude,
+                startLongitude,
+                endLongitude,
+                distance,
+                takeTime,
+                slope);
     }
 }
