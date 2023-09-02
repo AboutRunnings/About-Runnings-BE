@@ -6,6 +6,7 @@ import java.util.List;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.antlr.v4.runtime.misc.NotNull;
 
 @Table(name = "tbl_challenge")
 @Getter
@@ -22,7 +23,7 @@ public class Challenge extends BaseEntity {
     private String title;
 
     private String content;
-
+    
     private LocalDateTime startDate;
 
     private LocalDateTime endDate;
@@ -36,18 +37,26 @@ public class Challenge extends BaseEntity {
         leaderBoards.add(leaderBoard);
     }
 
-    public Challenge(
-            Long userId,
-            String title,
-            String content,
-            LocalDateTime startDate,
-            LocalDateTime endDate,
-            Long runHistoryId) {
+    private Challenge(Long userId,
+                      String title,
+                      String content,
+                      LocalDateTime startDate,
+                      LocalDateTime endDate,
+                      Long runHistoryId) {
         this.userId = userId;
         this.title = title;
         this.content = content;
         this.startDate = startDate;
         this.endDate = endDate;
         this.runHistoryId = runHistoryId;
+    }
+
+    public Challenge toEntity(Long userId,
+                              String title,
+                              String content,
+                              LocalDateTime startDate,
+                              LocalDateTime endDate,
+                              Long runHistoryId) {
+        return new Challenge(userId, title, content, startDate, endDate, runHistoryId);
     }
 }
