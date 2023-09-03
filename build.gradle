@@ -46,6 +46,7 @@ subprojects {
 	}
 }
 
+
 // spotless 설정
 spotless {
 	java {
