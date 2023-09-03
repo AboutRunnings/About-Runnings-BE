@@ -20,9 +20,13 @@ public class Comment extends BaseEntity {
 
     private Long courseContentId;
 
-    public Comment(String comment, Long userId, Long courseContentId) {
+    private Comment(String comment, Long userId, Long courseContentId) {
         this.comment = comment;
         this.userId = userId;
         this.courseContentId = courseContentId;
+    }
+
+    public Comment toEntity(String comment, Long userId, Long courseContentId) {
+        return new Comment(comment, userId, courseContentId);
     }
 }

@@ -3,7 +3,6 @@ import jakarta.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.AccessLevel;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -51,8 +50,7 @@ public class CourseContent extends BaseEntity {
         comments.add(comment);
     }
 
-    @Builder
-    public CourseContent(
+    private CourseContent(
             String content,
             String startLocation,
             String endLocation,
@@ -66,15 +64,36 @@ public class CourseContent extends BaseEntity {
         this.content = content;
         this.startLocation = startLocation;
         this.endLocation = endLocation;
-
         this.startLatitude = startLatitude;
         this.endLatitude = endLatitude;
-
         this.startLongitude = startLongitude;
         this.endLongitude = endLongitude;
-
         this.distance = distance;
         this.takeTime = takeTime;
         this.slope = slope;
+    }
+
+    public CourseContent toEntity(
+            String content,
+            String startLocation,
+            String endLocation,
+            Double startLatitude,
+            Double endLatitude,
+            Double startLongitude,
+            Double endLongitude,
+            Double distance,
+            String takeTime,
+            Double slope) {
+        return new CourseContent(
+                content,
+                startLocation,
+                endLocation,
+                startLatitude,
+                endLatitude,
+                startLongitude,
+                endLongitude,
+                distance,
+                takeTime,
+                slope);
     }
 }

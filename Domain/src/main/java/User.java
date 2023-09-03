@@ -1,7 +1,6 @@
 
 import jakarta.persistence.*;
 import lombok.AccessLevel;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -24,23 +23,32 @@ public class User extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private GenderType genderType;
 
-    private String ageRange;
+    private Integer age;
 
     private String profileImageUrl;
 
-    @Builder
-    public User(
+    private User(
             String name,
             String nickName,
             String email,
             GenderType genderType,
-            String ageRange,
+            Integer age,
             String profileImageUrl) {
         this.name = name;
         this.nickName = nickName;
         this.email = email;
         this.genderType = genderType;
-        this.ageRange = ageRange;
+        this.age = age;
         this.profileImageUrl = profileImageUrl;
+    }
+
+    public User toEntity(
+            String name,
+            String nickName,
+            String email,
+            GenderType genderType,
+            Integer age,
+            String profileImageUrl) {
+        return new User(name, nickName, email, genderType, age, profileImageUrl);
     }
 }

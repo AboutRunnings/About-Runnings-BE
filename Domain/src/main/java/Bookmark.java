@@ -22,10 +22,15 @@ public class Bookmark extends BaseEntity {
 
     private BookmarkType bookmarkType;
 
-    public Bookmark(Long userId, Long challengeId, Long courseId, BookmarkType bookmarkType) {
+    private Bookmark(Long userId, Long challengeId, Long courseId, BookmarkType bookmarkType) {
         this.userId = userId;
         this.challengeId = challengeId;
         this.courseId = courseId;
         this.bookmarkType = bookmarkType;
+    }
+
+    public Bookmark toEntity(
+            Long userId, Long challengeId, Long courseId, BookmarkType bookmarkType) {
+        return new Bookmark(userId, challengeId, courseId, bookmarkType);
     }
 }
