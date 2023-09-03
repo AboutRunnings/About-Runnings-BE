@@ -1,3 +1,5 @@
+package response;
+
 
 import lombok.Builder;
 import lombok.Getter;
